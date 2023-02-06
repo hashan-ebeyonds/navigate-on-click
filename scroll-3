@@ -1,0 +1,68 @@
+    /*############### Add Active When Scroll ###############*/
+    
+    const sections = document.querySelectorAll('[data-scroll]');
+
+    window.addEventListener('scroll',function(){
+    
+        activeOnScroll();
+        
+    });
+    
+    function activeOnScroll(){
+            
+            let currentSection = ""
+    
+                sections.forEach(function(section){
+    
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+    
+            if(pageYOffset > sectionTop - 150){
+    
+                currentSection = section.getAttribute('data-scroll'); 
+    
+                $('.scroll-navigation-links li a').each(function(idx,element){
+                    
+                    let activeLink = $(this);
+    
+                    let link = activeLink.data('link');
+                    
+                    if(link == currentSection){
+                    
+                        if(! $('body').hasClass('scrolling')){
+                            
+                            activeLink.closest( "li" ).addClass('active');
+                            
+                        }
+                
+                    } else {
+    
+                        $(this).closest( "li" ).removeClass('active');
+    
+                    }
+    
+                });
+    
+    
+            }
+     
+        })
+            
+    
+        }
+    
+    
+    
+    
+    let windowHash = window.location.hash;
+
+    // If Hash Have Onload
+    if (windowHash) {
+
+        let navigateHash = windowHash.replace('#', '');
+
+        $('html, body').animate({
+
+            scrollTop: $(`[data-scroll='${navigateHash}']`).offset().top - 100
+
+        }, 2000);
