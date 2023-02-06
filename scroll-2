@@ -1,0 +1,5 @@
+        $('html, body').animate({
+
+            scrollTop: $(`[data-scroll='${navigateHash}']`).offset().top - 100
+
+        }, 2000);
